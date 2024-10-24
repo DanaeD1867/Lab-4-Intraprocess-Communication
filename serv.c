@@ -77,12 +77,12 @@ int main(int argc, char const* argv[])
 							  token = strtok(NULL, " ");  // get next token (value)
 								val = atoi(token);
 								list_add_to_front(mylist,val);
-                sprintf(sbuf, "ACK %s", ACK);
+                sprintf(sbuf,"%s%d", ACK, val);
 						}else if(strcmp(token,"add_back") == 0){
 							token = strtok(NULL, " "); 
 							val = atoi(token); 
 							list_add_to_back(mylist, val);
-							sprintf(sbuf, "ACK %s", ACK);
+							sprintf(sbuf,"%s%d", ACK, val);
 						}
 						else if(strcmp(token,"remove_position") == 0){
 							  token = strtok(NULL, " ");
@@ -95,7 +95,7 @@ int main(int argc, char const* argv[])
 							token = strtok(NULL, " ");
 							val = atoi(token); 
 							list_add_at_index(mylist, idx, val);
-							
+              sprintf(sbuf,"%s%d", ACK, val);
 						}
 						else if(strcmp(token,"print") == 0){
 							  sprintf(sbuf,"%s", listToString(mylist));
@@ -117,6 +117,6 @@ int main(int argc, char const* argv[])
 
 void signal_handler(int signal){
 	printf("Caught signal %d, terminating server...\n", signal); 
-	list_free(mylist); 
+	list_free(mylist);
 	exit(0); 
 }
