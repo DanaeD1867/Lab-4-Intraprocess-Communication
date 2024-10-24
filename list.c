@@ -183,7 +183,6 @@ elem list_remove_from_back(list_t *l) {
   }
 
   node_t* curr = l->head; 
-  node_t* prev = NULL;
 
   int listlen = list_length(l); 
   elem value; 
@@ -191,16 +190,18 @@ elem list_remove_from_back(list_t *l) {
   if(listlen == 1){
     value = l->head->value; 
     l->head = NULL;
+    free(l->head); 
     return value; 
   }
   
   while(curr->next->next != NULL){
-    prev = curr; 
     curr = curr->next; 
   }
 
-  value = curr->value;
-  prev->next = NULL;
+  node_t* last = curr->next; 
+  value = last->value;
+  curr->next = NULL;
+  free(last); 
   return value; 
 
 }
